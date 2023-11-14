@@ -39,7 +39,7 @@ This Todo app is a full-stack web application built using Vite for the React cli
     npm install
 
 4. **Set up environment variables:**
-    ```In the server directory, create a .env file and configure your environment variables (e.g., database URI, port number).
+    In the server directory, create a .env file and configure your environment variables (e.g., database URI, port number).
 
 5. **Start the server:**
     ```cd server
