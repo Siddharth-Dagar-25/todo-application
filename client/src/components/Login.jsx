@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "./logo.png";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
@@ -11,7 +11,13 @@ import Example from "./Navbar.jsx";
 const Login = () => {
   let navigate = useNavigate();
 
-  const { setUser } = useUser();
+  const { setUser, isLoggedIn, setIsLoggedIn } = useUser();
+
+  useEffect(() => {
+    setIsLoggedIn(false);
+  }, [])
+  
+  console.log(isLoggedIn);
   
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -23,6 +29,8 @@ const Login = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const auth = getAuth();
+    setIsLoggedIn(true);
+    console.log(isLoggedIn);
 
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
@@ -46,6 +54,7 @@ const Login = () => {
         toast.error("Invalid user credentials", {
           autoClose: 2000,
         });
+        setIsLoggedIn(false);
       });
   };
   

@@ -15,7 +15,7 @@ const Body = () => {
       {isLoggedIn && (<Header />)}
       <Routes>
         <Route path="/" element={<GetStarted />} />
-        <Route path="/home" element={<App />} />
+        <Route path="/home" element={ <App /> } />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
       </Routes>

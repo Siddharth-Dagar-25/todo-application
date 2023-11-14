@@ -4,6 +4,9 @@ import axios from "axios";
 import { baseURL } from "./utils/constant";
 import Popup from "./components/Popup";
 import Navbar from "./components/Navbar.jsx";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { useUser } from "./components/UserContext.jsx";
 
 const App = () => {
   const [toDos, setToDos] = useState([]);
@@ -12,7 +15,29 @@ const App = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [popupContent, setPopupContent] = useState({});
 
+  let navigate = useNavigate();
+
+  const { isLoggedIn, setIsLoggedIn } = useUser();
+  setIsLoggedIn(true);
+
+  console.log(isLoggedIn)
+
   useEffect(() => {
+    if (!isLoggedIn) {
+      toast("Please log in to view this page", {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      setTimeout(() => {
+        navigate("/login");
+      }, 1000);
+      return; 
+    }
     axios
       .get(`${baseURL}/get`)
       .then((res) => setToDos(res.data))

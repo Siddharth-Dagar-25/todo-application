@@ -4,6 +4,7 @@ import logo from "./logo.png";
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { toast } from "react-toastify";
 import app from "../utils/firebase.js";
+import { useUser } from "./UserContext.jsx";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -13,6 +14,9 @@ const Register = () => {
 
   let navigate = useNavigate();
 
+  const { setUser, isLoggedIn, setIsLoggedIn } = useUser();
+  console.log(isLoggedIn);
+
   function handleClick() {
     navigate("/login");
   }
@@ -20,6 +24,8 @@ const Register = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const auth = getAuth(app);
+    setIsLoggedIn(!isLoggedIn);
+    console.log(isLoggedIn);
 
     if (password !== confirmPassword) {
       toast.error("Passwords do not match.");
@@ -27,13 +33,13 @@ const Register = () => {
     }
 
     createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      // Update the user's profile with their name
-      return updateProfile(userCredential.user, {
-        displayName: name
-      }).then(() => userCredential);
-    })
-    .then((userCredential) => {
+      .then((userCredential) => {
+        // Update the user's profile with their name
+        setUser({
+          email: userCredential.user.email,
+          uid: userCredential.user.uid,
+          displayName: userCredential.user.displayName || email.split('@')[0] // Set displayName or use part of email
+        });
       toast("Sign Up Successful.", {
           position: "top-center",
           autoClose: 2000,
@@ -42,7 +48,7 @@ const Register = () => {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-        });
+      });
         navigate("/home");
       })
       .catch((error) => {

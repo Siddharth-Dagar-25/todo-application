@@ -1,6 +1,7 @@
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore"; 
 import { db } from './firebase'; 
+import { useEffect, useState } from "react";
 
 const createNewUser = (email, password, fullName) => {
   const auth = getAuth();
