@@ -28,8 +28,7 @@ This Todo app is a full-stack web application built using Vite for the React cli
 ### Installation
 1. **Clone the repository:**
    ```bash
-   git clone [your-repo-url]
-   cd [your-repo-directory]
+   git clone https://github.com/Siddharth-Dagar-25/todo-application
 
 2. **Install dependencies for the server:**
     ```cd server
@@ -40,7 +39,7 @@ This Todo app is a full-stack web application built using Vite for the React cli
     npm install
 
 4. **Set up environment variables:**
-    ```In the server directory, create a .env file and configure your environment variables (e.g., database URI, port number).
+    In the server directory, create a .env file and configure your environment variables (e.g., database URI, port number).
 
 5. **Start the server:**
     ```cd server
