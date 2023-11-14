@@ -1,10 +1,12 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import logo from "./logo.png";
+import logo from "../utils/logo.png";
 import Avatar from "react-avatar";
 import { Link } from "react-router-dom";
 import { useUser } from "./UserContext.jsx";
+import { baseURL } from "../utils/constant.js";
+import axios from "axios";
 
 const navigation = [
   { name: "Dashboard", href: "#", current: true },
@@ -19,7 +21,25 @@ function classNames(...classes) {
 
 export default function Example() {
   const { user } = useUser();
-  const [searchQuery, setSearchQuery] = useState("");
+  const [todos, setTodos] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filteredTodos, setFilteredTodos] = useState([]);
+
+  // Fetch todos from the API
+  useEffect(() => {
+    axios
+      .get(`${baseURL}/get`)
+      .then(res => setTodos(res.data))
+      .catch(err => console.log(err));
+  }, []);
+
+  // Update filtered todos when search query changes
+  useEffect(() => {
+    const filtered = todos.filter(todo => 
+      todo.name && todo.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredTodos(filtered);
+  }, [searchQuery, todos]);
 
   const handleSearch = (event) => {
     event.preventDefault();
@@ -28,11 +48,11 @@ export default function Example() {
   };
 
   return (
-    <Disclosure as="nav" className="bg-black">
+    <Disclosure as="nav" className="bg-gray-900 h-[80px]">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-            <div className="relative flex h-16 items-center justify-between">
+            <div className="pt-3 relative flex h-16 items-center justify-between">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button */}
                 <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
@@ -78,19 +98,6 @@ export default function Example() {
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                {/* Search bar */}
-                <form onSubmit={handleSearch} className="hidden md:flex mr-3">
-                  <input
-                    type="text"
-                    placeholder="Search..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="rounded-md focus:ring-white focus:border-white bg-gray-700 text-white px-3 py-2"
-                  />
-                  <button type="submit" className="ml-2 text-gray-400 hover:text-white">
-                    <MagnifyingGlassIcon className="h-5 w-5" />
-                  </button>
-                </form>
 
                 {/* Profile dropdown */}
                 <Menu as="div" className="ml-3 relative">
@@ -124,19 +131,6 @@ export default function Example() {
                             )}
                           >
                             Your Profile
-                          </a>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href="#"
-                            className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
-                            )}
-                          >
-                            Settings
                           </a>
                         )}
                       </Menu.Item>

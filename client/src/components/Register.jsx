@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import logo from "./logo.png";
+import logo from "../utils/logo.png";
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { toast } from "react-toastify";
 import app from "../utils/firebase.js";

@@ -7,20 +7,19 @@ import Navbar from "./components/Navbar.jsx";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "./components/UserContext.jsx";
+import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 
 const App = () => {
   const [toDos, setToDos] = useState([]);
   const [input, setInput] = useState("");
+  const [searchQuery, setSearchQuery] = useState(""); 
   const [updateUI, setUpdateUI] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [popupContent, setPopupContent] = useState({});
 
   let navigate = useNavigate();
-
   const { isLoggedIn, setIsLoggedIn } = useUser();
   setIsLoggedIn(true);
-
-  console.log(isLoggedIn)
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -36,7 +35,7 @@ const App = () => {
       setTimeout(() => {
         navigate("/login");
       }, 1000);
-      return; 
+      return;
     }
     axios
       .get(`${baseURL}/get`)
@@ -55,50 +54,75 @@ const App = () => {
       .catch((err) => console.log(err));
   };
 
+  // Function to highlight search query in ToDo text
+  const highlightSearch = (text, query) => {
+    if (!query) return text;
+    const parts = text.split(new RegExp(`(${query})`, 'gi'));
+    return parts.map((part, index) => 
+      part.toLowerCase() === query.toLowerCase() ? 
+        <span key={index} className="bg-yellow-300">{part}</span> : 
+        <span key={index}>{part}</span>
+    );
+  };
+
   return (
-    <main className="h-screen font-inter">
-  <Navbar/>
-  <div className="mx-auto max-w-fit  items-center justify-center">
-    <h1 className="text-center text-3xl">ToDo App</h1>
+    <main className="h-screen overflow-auto font-inter bg-zinc-400">
+      <Navbar/>
+      <div className="mx-auto max-w-fit items-center justify-center pt-5 h-full">
+        <h1 className="text-center text-5xl font-extrabold">ToDo Application</h1>
 
-    <div className="flex justify-center gap-2.5 mt-5">
-      <input
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        type="text"
-        placeholder="Add a ToDo..."
-        className="p-2.5 bg-gray-600 text-white outline-none border-none w-50 placeholder-white"
-      />
-      <button 
-        onClick={saveToDo}
-        className="p-2.5 bg-gray-600 text-white outline-none border-none hover:bg-gray-700 cursor-pointer"
-      >
-        Add
-      </button>
-    </div>
+        <div className="flex justify-center gap-2.5 mt-5">
+          <input
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            type="text"
+            placeholder="Add ToDo..."
+            className="p-2.5 bg-gray-500 text-white outline-none border-none w-[300px] placeholder-white rounded-xl"
+          />
+          <button 
+            onClick={saveToDo}
+            className="p-2.5 w-24 bg-red-500 text-white outline-none border-none hover:bg-red-400 cursor-pointer rounded-xl"
+          >
+            Add
+          </button>
+        </div>
 
-    <div className="mt-5 flex flex-col gap-5">
-      {toDos.map((el) => (
-        <ToDo
-          key={el._id}
-          text={el.toDo}
-          id={el._id}
-          setUpdateUI={setUpdateUI}
+        <div className="absolute right-10 top-[165px] flex invisible lg:visible">
+          <input
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            type="text"
+            placeholder="Search ToDo..."
+            className="p-2.5 bg-gray-500 text-white outline-none border-none w-[300px] placeholder-white rounded-xl"
+          />
+          <div className="">
+            <MagnifyingGlassIcon className="h-10 w-10" />
+          </div>
+        </div>
+
+        <div className="mt-5 flex flex-col gap-5">
+          {toDos
+            .filter((el) => el.toDo.toLowerCase().includes(searchQuery.toLowerCase()))
+            .map((el) => (
+              <ToDo
+                key={el._id}
+                text={highlightSearch(el.toDo, searchQuery)}
+                id={el._id}
+                setUpdateUI={setUpdateUI}
+                setShowPopup={setShowPopup}
+                setPopupContent={setPopupContent}
+              />
+            ))}
+        </div>
+      </div>
+      {showPopup && (
+        <Popup
           setShowPopup={setShowPopup}
-          setPopupContent={setPopupContent}
+          popupContent={popupContent}
+          setUpdateUI={setUpdateUI}
         />
-      ))}
-    </div>
-  </div>
-  {showPopup && (
-    <Popup
-      setShowPopup={setShowPopup}
-      popupContent={popupContent}
-      setUpdateUI={setUpdateUI}
-    />
-  )}
-</main>
-
+      )}
+    </main>
   );
 };
 
