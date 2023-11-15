@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../utils/logo.png";
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
@@ -15,6 +15,11 @@ const Register = () => {
   let navigate = useNavigate();
 
   const { setUser, isLoggedIn, setIsLoggedIn } = useUser();
+
+  useEffect(() => {
+    setIsLoggedIn(false);
+  }, [])
+
   console.log(isLoggedIn);
 
   function handleClick() {
@@ -24,7 +29,7 @@ const Register = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const auth = getAuth(app);
-    setIsLoggedIn(!isLoggedIn);
+    setIsLoggedIn(true);
     console.log(isLoggedIn);
 
     if (password !== confirmPassword) {
