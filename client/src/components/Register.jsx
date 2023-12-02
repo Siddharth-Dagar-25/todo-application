@@ -20,8 +20,6 @@ const Register = () => {
     setIsLoggedIn(false);
   }, [])
 
-  console.log(isLoggedIn);
-
   function handleClick() {
     navigate("/login");
   }
@@ -30,7 +28,6 @@ const Register = () => {
     event.preventDefault();
     const auth = getAuth(app);
     setIsLoggedIn(true);
-    console.log(isLoggedIn);
 
     if (password !== confirmPassword) {
       toast.error("Passwords do not match.");

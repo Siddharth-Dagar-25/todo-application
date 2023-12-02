@@ -14,7 +14,6 @@ const ToDo = ({
 }) => {
   const deleteTodo = () => {
     axios.delete(`${baseURL}/delete/${id}`).then((res) => {
-      console.log(res.data);
       setUpdateUI((prevState) => !prevState);
     });
   };

@@ -43,11 +43,11 @@ const App = () => {
       .catch((err) => console.log(err));
   }, [updateUI]);
 
+
   const saveToDo = () => {
     axios
       .post(`${baseURL}/save`, { toDo: input })
       .then((res) => {
-        console.log(res.data);
         setUpdateUI((prevState) => !prevState);
         setInput("");
       })

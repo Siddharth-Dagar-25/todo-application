@@ -10,7 +10,6 @@ const Popup = ({ setShowPopup, popupContent, setUpdateUI }) => {
     axios
       .put(`${baseURL}/update/${popupContent.id}`, { toDo: input })
       .then((res) => {
-        console.log(res.data);
         setUpdateUI((prevState) => !prevState);
         setShowPopup(false);
       });

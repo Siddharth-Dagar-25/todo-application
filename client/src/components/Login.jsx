@@ -17,7 +17,6 @@ const Login = () => {
     setIsLoggedIn(false);
   }, [])
   
-  console.log(isLoggedIn);
   
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -30,7 +29,6 @@ const Login = () => {
     event.preventDefault();
     const auth = getAuth();
     setIsLoggedIn(true);
-    console.log(isLoggedIn);
 
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
