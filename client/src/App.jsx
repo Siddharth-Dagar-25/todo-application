@@ -19,8 +19,11 @@ const App = () => {
 
   let navigate = useNavigate();
   const { isLoggedIn, setIsLoggedIn } = useUser();
-  setIsLoggedIn(true);
 
+  useEffect(() => {
+    setIsLoggedIn(true);
+  }, []);
+  
   useEffect(() => {
     if (!isLoggedIn) {
       toast("Please log in to view this page", {
