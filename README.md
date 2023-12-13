@@ -73,4 +73,3 @@ I welcome any and all contributions! Here are some ways you can get started:
 - Add your contributions (code or documentation)
 - Commit and push
 - Wait for pull request to be merged
-
