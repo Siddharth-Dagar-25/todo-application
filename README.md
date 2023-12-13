@@ -7,14 +7,8 @@ Video Demo: https://www.loom.com/share/10522e7829854780a6915841323f5eee?sid=0090
 
 ## ScreenShots
 Some snapshots of the project : 
-![Alt text](/assets/Screenshot%202023-12-13%20at%206.32.14%20AM.png?raw=true "Optional Title")
-![Screenshot](/assets/Screenshot%202023-12-13%20at%206.32.14%20AM.png)
-<div align="center">
-    <img src="/assets/Screenshot 2023-12-13 at 6.32.14 AM.png" width="400px"</img> 
-</div>
-<!-- ![Alt text](/assets/Screenshot%202023-12-13%20at%206.32.27%20AM.png?raw=true "Optional Title")
-![Alt text](/assets/Screenshot%202023-12-13%20at%206.32.38%20AM.png?raw=true "Optional Title")
-![Alt text](/assets/Screenshot%202023-12-13%20at%206.33.30%20AM.png?raw=true "Optional Title") -->
+<img width="1430" alt="Screenshot 2023-12-13 at 6 32 14 AM" src="https://github.com/Siddharth-Dagar-25/todo-application/assets/97306013/336420e2-54b3-44bc-bb06-b224339cdcd0">
+
 
 ## Features
 - User authentication and authorization
