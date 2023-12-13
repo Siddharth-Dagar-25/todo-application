@@ -5,6 +5,13 @@ This Todo app is a full-stack web application built using Vite for the React cli
 
 Video Demo: https://www.loom.com/share/10522e7829854780a6915841323f5eee?sid=00905834-6575-4a91-aee9-e9183935373a
 
+## ScreenShots
+Some snapshots of the projects : 
+![Alt text](/assets/Screenshot%202023-12-13%20at%206.32.14%20AM.png?raw=true "Optional Title")
+![Alt text](/assets/Screenshot%202023-12-13%20at%206.32.27%20AM.png?raw=true "Optional Title")
+![Alt text](/assets/Screenshot%202023-12-13%20at%206.32.38%20AM.png?raw=true "Optional Title")
+![Alt text](/assets/Screenshot%202023-12-13%20at%206.33.30%20AM.png?raw=true "Optional Title")
+
 ## Features
 - User authentication and authorization
 - Add, delete, and update tasks
