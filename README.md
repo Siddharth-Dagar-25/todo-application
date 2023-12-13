@@ -3,6 +3,8 @@
 ## Description
 This Todo app is a full-stack web application built using Vite for the React client, and Node.js with Express for the server. It utilizes MongoDB for data storage, providing a responsive and interactive experience for managing tasks.
 
+Video Demo: https://www.loom.com/share/10522e7829854780a6915841323f5eee?sid=00905834-6575-4a91-aee9-e9183935373a
+
 ## Features
 - User authentication and authorization
 - Add, delete, and update tasks
