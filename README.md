@@ -8,6 +8,7 @@ Video Demo: https://www.loom.com/share/10522e7829854780a6915841323f5eee?sid=0090
 ## ScreenShots
 Some snapshots of the project : 
 ![Alt text](/assets/Screenshot%202023-12-13%20at%206.32.14%20AM.png?raw=true "Optional Title")
+![Screenshot](Screenshot%202023-12-13%20at%206.32.14%20AM.png)
 <!-- ![Alt text](/assets/Screenshot%202023-12-13%20at%206.32.27%20AM.png?raw=true "Optional Title")
 ![Alt text](/assets/Screenshot%202023-12-13%20at%206.32.38%20AM.png?raw=true "Optional Title")
 ![Alt text](/assets/Screenshot%202023-12-13%20at%206.33.30%20AM.png?raw=true "Optional Title") -->
